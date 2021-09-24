@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Record"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+        <TextView
+            app:layout_constraintBottom_toBottomOf="@id/etUpdateName"
+            app:layout_constraintTop_toTopOf="@id/etUpdateName"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/tvNameLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            app:layout_constraintStart_toEndOf="@id/tvNameLabel"
+            android:id="@+id/etUpdateName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter Name" />
+
+
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/etUpdateEmailId"
+            app:layout_constraintTop_toTopOf="@id/etUpdateEmailId"
+            android:id="@+id/tvEmailLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Email ID"
+            android:textSize="18sp" />
+
+        <EditText
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etUpdateName"
+            app:layout_constraintStart_toEndOf="@id/tvEmailLabel"
+            android:id="@+id/etUpdateEmailId"
+            android:layout_width="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Enter Email ID" />
+
+
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/etUpdateEmailId"
+            app:layout_constraintEnd_toStartOf="@id/tvCancel"
+            android:id="@+id/tvUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="UPDATE"
+            android:textColor="@android:color/holo_red_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            app:layout_constraintTop_toBottomOf="@id/etUpdateEmailId"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:text="CANCEL"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
