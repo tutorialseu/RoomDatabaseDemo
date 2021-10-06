@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-/**
- * A database that stores employee information.
+/** Todo 6
+ * Create a database that stores employee information.
  * And a global method to get access to the database.
  */
 @Database(entities = [EmployeeEntity::class],version = 2)
