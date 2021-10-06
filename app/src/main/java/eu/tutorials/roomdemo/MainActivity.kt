@@ -21,12 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-
+   //Todo 9: get the employeeDao variable through the application class
         val employeeDao = (application as EmployeeApp).db.employeeDao()
         binding?.btnAdd?.setOnClickListener {
+            //Todo 10 pass in the employeDao
             addRecord(employeeDao)
         }
-
+     //Todo  11 launch a coroutine block and fetch all employee
         lifecycleScope.launch {
                 employeeDao.fetchAllEmployee().collect {
                     Log.d("exactemployee", "$it")
@@ -37,7 +38,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    /**
+    /** Todo 4: create an employee param to pass into updateRecordDialog and updateRecordDialog
+     *  method
      * Function is used show the list of inserted data.
      */
     private fun setupListOfDataIntoRecyclerView(employeesList:ArrayList<EmployeeEntity>,
@@ -66,7 +68,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //method for saving records in database
+    //Todo 1 create an employeeDao param to access the insert method
+    //launch a coroutine block to call the method for inserting entry
     fun addRecord(employeeDao: EmployeeDao) {
         val name = binding?.etName?.text.toString()
         val email = binding?.etEmailId?.text.toString()
@@ -87,6 +90,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+/**Todo 5:  create an id param for identifying the row to be updated
+* Create an employeeDao param for accessing method from the dao
+ * We also launch a coroutine block to fetch the selected employee and update it
+ */
     fun updateRecordDialog(id:Int,employeeDao: EmployeeDao) {
         val updateDialog = Dialog(this, R.style.Theme_Dialog)
         updateDialog.setCancelable(false)
@@ -128,8 +136,10 @@ class MainActivity : AppCompatActivity() {
         updateDialog.show()
     }
 
-    /**
-     * Method is used to show the Alert Dialog.
+    /** Todo 6
+     * Method is used to show the Alert Dialog and delete the selected employee.
+     * We add an id to get the selected position and an employeeDao param to get the
+     * methods from the dao interface then launch a coroutine block to call the methods
      */
     fun deleteRecordAlertDialog(id:Int,employeeDao: EmployeeDao) {
         val builder = AlertDialog.Builder(this)

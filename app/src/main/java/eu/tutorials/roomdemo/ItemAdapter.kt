@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import eu.tutorials.roomdemo.databinding.ItemsRowBinding
-/**
+/** Todo 2
 * We have the @param [items] to represent the list that populates the adapter
  * The @param [updateListener] to listen to the edit icon an get the positions id
  * The @param [deleteListener] to listen to the delete icon and get the positions id
@@ -56,7 +56,8 @@ class ItemAdapter(private val items: ArrayList<EmployeeEntity>,
         } else {
             holder.llMain.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite))
         }
-
+// Todo 3 set onclick listem on the icon and invoke update and delete listeners
+        //start
         holder.ivEdit.setOnClickListener {
          updateListener.invoke(item.id)
         }
@@ -65,7 +66,7 @@ class ItemAdapter(private val items: ArrayList<EmployeeEntity>,
           deleteListener.invoke(item.id)
         }
     }
-
+//end
     /**
      * Gets the number of items in the list
      */

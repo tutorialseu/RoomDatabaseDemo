@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="eu.tutorials.roomdemo">
-
+    <!--Todo 8: add the application class as android:name value-->
     <application
         android:name=".EmployeeApp"
         android:allowBackup="true"
