@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    //Todo 1 enable kotlin annotation processor
     id 'kotlin-kapt'
 }
 
@@ -30,6 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    //Todo 3 We also enable viewbinding
     buildFeatures {
         viewBinding true
     }
@@ -37,9 +39,10 @@ android {
 
 
 dependencies {
+    //Todo 2 define variables use with dependencies
+    //start
     def room_version = '2.3.0'
     def activityVersion = '1.3.1'
-    def lifecycle_version = "2.4.0-beta01"
      // Room and Lifecycle dependencies
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -48,7 +51,7 @@ dependencies {
 
     //kotlin extension for coroutine support with activities
     implementation "androidx.activity:activity-ktx:$activityVersion"
-
+    //end
 
     implementation 'androidx.core:core-ktx:1.6.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'

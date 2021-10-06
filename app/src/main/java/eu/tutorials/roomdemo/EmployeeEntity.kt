@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//creating a Data Model Class
+//Todo 4: creating a Data Model Class and using as entity
 @Entity(tableName = "employee-table")
 data class EmployeeEntity(
     @PrimaryKey(autoGenerate = true)
