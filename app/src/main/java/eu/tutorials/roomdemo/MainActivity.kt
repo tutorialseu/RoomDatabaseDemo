@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import eu.tutorials.roomdemo.databinding.ActivityMainBinding
 import eu.tutorials.roomdemo.databinding.DialogUpdateBinding
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -51,8 +52,15 @@ class MainActivity : AppCompatActivity() {
             // Adapter class is initialized and list is passed in the param.
             val itemAdapter = ItemAdapter(employeesList,{updateId ->
                 updateRecordDialog(updateId,employeeDao)
-            }){deleteId->
-           deleteRecordAlertDialog(deleteId,employeeDao)
+            }){ deleteId->
+                lifecycleScope.launch {
+                        employeeDao.fetchEmployeeById(deleteId).collect {
+                            if (it != null) {
+                                deleteRecordAlertDialog(deleteId, employeeDao, it)
+                            }
+                        }
+                }
+
             }
             // Set the LayoutManager that this RecyclerView will use.
             binding?.rvItemsList?.layoutManager = LinearLayoutManager(this)
@@ -105,8 +113,10 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             employeeDao.fetchEmployeeById(id).collect {
-                binding.etUpdateName.setText(it.name)
-                binding.etUpdateEmailId.setText(it.email)
+                if (it != null) {
+                    binding.etUpdateName.setText(it.name)
+                    binding.etUpdateEmailId.setText(it.email)
+                }
             }
         }
         binding.tvUpdate.setOnClickListener {
@@ -136,29 +146,23 @@ class MainActivity : AppCompatActivity() {
         updateDialog.show()
     }
 
+
     /** Todo 6
      * Method is used to show the Alert Dialog and delete the selected employee.
      * We add an id to get the selected position and an employeeDao param to get the
      * methods from the dao interface then launch a coroutine block to call the methods
      */
-    fun deleteRecordAlertDialog(id:Int,employeeDao: EmployeeDao) {
+    fun deleteRecordAlertDialog(id:Int,employeeDao: EmployeeDao,employee: EmployeeEntity) {
         val builder = AlertDialog.Builder(this)
         //set title for alert dialog
         builder.setTitle("Delete Record")
         //set message for alert dialog
-        lifecycleScope.launch {
-            employeeDao.fetchEmployeeById(id).collect {
-                if (it !=null) {
-                    builder.setMessage("Are you sure you wants to delete ${it.name}.")
-                }
-            }
-        }
+            builder.setMessage("Are you sure you wants to delete ${employee.name}.")
                     builder.setIcon(android.R.drawable.ic_dialog_alert)
 
                     //performing positive action
                     builder.setPositiveButton("Yes") { dialogInterface, _ ->
                         lifecycleScope.launch {
-                            //calling the deleteEmployee method of DatabaseHandler class to delete record
                             employeeDao.delete(EmployeeEntity(id))
                             Toast.makeText(
                                 applicationContext,
