@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-
     private var binding:ActivityMainBinding? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 * Create an employeeDao param for accessing method from the dao
  * We also launch a coroutine block to fetch the selected employee and update it
  */
-    fun updateRecordDialog(id:Int,employeeDao: EmployeeDao) {
+    fun updateRecordDialog(id:Int,employeeDao: EmployeeDao)  {
         val updateDialog = Dialog(this, R.style.Theme_Dialog)
         updateDialog.setCancelable(false)
         /*Set the screen content from a layout resource.
