@@ -2,6 +2,7 @@ package eu.tutorials.roomdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import eu.tutorials.roomdemo.data.EmployeeDao
@@ -23,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         binding.btnAdd.setOnClickListener {
             employeeDao?.let {
                     dao -> addRecord(dao)
+            }
+        }
+
+        lifecycleScope.launch {
+            employeeDao?.fetchAllEmployee()?.collect {
+                Log.d("employee", "$it")
             }
         }
     }
