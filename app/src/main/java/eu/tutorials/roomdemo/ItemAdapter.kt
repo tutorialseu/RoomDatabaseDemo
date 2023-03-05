@@ -8,9 +8,10 @@ import eu.tutorials.roomdemo.data.EmployeeEntity
 import eu.tutorials.roomdemo.databinding.ItemsRowBinding
 
 class ItemAdapter(
-    private val items: ArrayList<EmployeeEntity>
-) :
-    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+    private val items: MutableList<EmployeeEntity>,
+    private val updateListener: (id: Int) -> Unit,
+    private val deleteListener: (id: Int) -> Unit
+) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
 
     /**
@@ -40,10 +41,8 @@ class ItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val context = holder.itemView.context
         val item = items[position]
-
         holder.tvName.text = item.name
         holder.tvEmail.text = item.email
-
         // Updating the background color according to the odd/even positions in list.
         if (position % 2 == 0) {
             holder.llMain.setBackgroundColor(
@@ -54,6 +53,14 @@ class ItemAdapter(
             )
         } else {
             holder.llMain.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite))
+        }
+    //set onclick listener on the icon and invoke update and delete listeners
+        //start
+        holder.ivEdit.setOnClickListener {
+            updateListener(item.id)
+        }
+        holder.ivDelete.setOnClickListener {
+            deleteListener(item.id)
         }
     }
 //end
